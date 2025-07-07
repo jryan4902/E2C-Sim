@@ -2,9 +2,7 @@
 from utils.simulator import Simulator
 from utils.machine import Machine
 import utils.config as config
-import  gui.simUi as gui
 
-from PyQt5.QtWidgets import QApplication
 import sys
 import csv
 import pandas as pd
@@ -30,21 +28,30 @@ for machine_type in config.machine_types:
         config.machines.append(machine)            
         id += 1
 
-#path_to_result = f'./output/data/{heterogeneity_folder}/{etc}/{scenario}/{config.scheduling_method}'        
+
+#path_to_result = f'./output/data/{heterogeneity_folder}/{etc}/{scenario}/{config.scheduling_method}'
 #makedirs(path_to_result, exist_ok = True)
-app = QApplication(sys.argv)   
-main_w_rect = app.desktop().screenGeometry()
-w = main_w_rect.width()
-h = main_w_rect.height()
-# w = 1200
-# h = 600
 path_to_arrivals = './workloads/default/workload.csv'
 path_to_etc = './task_machine_performance/default/etc.csv'
 path_to_report = './output/data/default'
-view = gui.SimUi(w,h,path_to_arrivals, path_to_etc, path_to_report)
 
-view.show()
-app.exec()
+if config.gui == 1:
+    from PyQt5.QtWidgets import QApplication
+    import gui.simUi as gui
+
+    app = QApplication(sys.argv)
+    main_w_rect = app.desktop().screenGeometry()
+    w = main_w_rect.width()
+    h = main_w_rect.height()
+    # w = 1200
+    # h = 600
+    view = gui.SimUi(w, h, path_to_arrivals, path_to_etc, path_to_report)
+    view.show()
+    app.exec()
+else:
+    simulation = Simulator(path_to_arrivals, path_to_etc, path_to_report)
+    simulation.run()
+    simulation.report()
 
     
  
