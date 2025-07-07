@@ -32,5 +32,9 @@ Below, you can find the steps to execute the program:
    ```
    python main.py
    ```
- 
-10. To change the config of the machines and task types, open ```config.json``` and add new task types in the same format present and increase or decrease the amount of each machine present as well as add new machine types etc also in the format present. Once the desired changes have been made, save the changed files and run python main.py to see the results in the window.window 
+
+   The provided `config.json` disables the graphical interface by default. Set
+   `"gui": 1` if you want to display the PyQt windows.
+
+10. To change the config of the machines and task types, open ```config.json``` and add new task types in the same format present and increase or decrease the amount of each machine present as well as add new machine types etc also in the format present. Once the desired changes have been made, save the changed files and run python main.py to see the results in the window.
+11. If you want to run the simulator without the graphical interface (for example, when deploying it as a backend service), ensure the `"gui"` option in `config.json` is set to `0`.
